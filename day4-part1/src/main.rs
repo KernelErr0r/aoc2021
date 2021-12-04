@@ -98,7 +98,7 @@ impl BingoBoard {
 
         for x in 0..5 {
             for y in 0..5 {
-                if !self.contents[x][y].1 {
+                if !self.contents[y][x].1 {
                     break;
                 }
 
