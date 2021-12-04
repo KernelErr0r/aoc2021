@@ -1,10 +1,14 @@
-use std::{fs::File, io::{self, BufRead, BufReader}};
+use std::{
+    fs::File,
+    io::{self, BufRead, BufReader},
+};
 
-fn main() -> Result<(), io::Error>{
+fn main() -> Result<(), io::Error> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let numbers = reader.lines()
+    let numbers = reader
+        .lines()
         .into_iter()
         .filter_map(|line| line.ok())
         .filter_map(|line| line.parse::<usize>().ok())

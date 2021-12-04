@@ -1,10 +1,15 @@
-use std::{fs::File, io::{self, BufRead, BufReader}, ops::Add};
+use std::{
+    fs::File,
+    io::{self, BufRead, BufReader},
+    ops::Add,
+};
 
-fn main() -> Result<(), io::Error>{
+fn main() -> Result<(), io::Error> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let numbers = reader.lines()
+    let numbers = reader
+        .lines()
         .into_iter()
         .filter_map(|line| line.ok())
         .filter_map(|line| line.parse::<usize>().ok())
@@ -12,7 +17,7 @@ fn main() -> Result<(), io::Error>{
 
     let mut increased = 0usize;
 
-    for index in 0 .. numbers.len() - 3 {
+    for index in 0..numbers.len() - 3 {
         let first_window = (numbers[index], numbers[index + 1], numbers[index + 2]);
         let second_window = (numbers[index + 1], numbers[index + 2], numbers[index + 3]);
 

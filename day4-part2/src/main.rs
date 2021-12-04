@@ -47,9 +47,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     for number in numbers {
-        let last_board_remains = bingo_boards.iter()
+        let last_board_remains = bingo_boards
+            .iter()
             .filter(|bingo_board| bingo_board.has_bingo())
-            .count() == (bingo_boards.len() - 1);
+            .count()
+            == (bingo_boards.len() - 1);
 
         for bingo_board in &mut bingo_boards {
             let had_bingo = bingo_board.has_bingo();

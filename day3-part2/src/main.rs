@@ -1,18 +1,23 @@
-use std::{error::Error, fs::File, io::{BufRead, BufReader}};
+use std::{
+    error::Error,
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let binary_numbers = reader.lines()
+    let binary_numbers = reader
+        .lines()
         .into_iter()
         .filter_map(|line| line.ok())
         .collect::<Vec<_>>();
 
     // Numbers used to calculate the oxygen generator rate
     let mut oxygen_generator_numbers = binary_numbers.clone();
-    
-    for position in 0 .. binary_numbers[0].len() {
+
+    for position in 0..binary_numbers[0].len() {
         if oxygen_generator_numbers.len() == 1 {
             break;
         }
@@ -31,16 +36,18 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
 
         if zeroes > ones {
-            oxygen_generator_numbers.retain(|gamma_number| gamma_number.chars().nth(position).unwrap() == '0');
+            oxygen_generator_numbers
+                .retain(|gamma_number| gamma_number.chars().nth(position).unwrap() == '0');
         } else if zeroes <= ones {
-            oxygen_generator_numbers.retain(|gamma_number| gamma_number.chars().nth(position).unwrap() == '1');
+            oxygen_generator_numbers
+                .retain(|gamma_number| gamma_number.chars().nth(position).unwrap() == '1');
         }
     }
 
     // Numbers used to calculate the co2 scrubber rate
     let mut co2_scrubber_numbers = binary_numbers.clone();
 
-    for position in 0 .. binary_numbers[0].len() {
+    for position in 0..binary_numbers[0].len() {
         if co2_scrubber_numbers.len() == 1 {
             break;
         }
@@ -59,9 +66,11 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
 
         if zeroes > ones {
-            co2_scrubber_numbers.retain(|epsilon_number| epsilon_number.chars().nth(position).unwrap() == '1');
+            co2_scrubber_numbers
+                .retain(|epsilon_number| epsilon_number.chars().nth(position).unwrap() == '1');
         } else if zeroes <= ones {
-            co2_scrubber_numbers.retain(|epsilon_number| epsilon_number.chars().nth(position).unwrap() == '0');
+            co2_scrubber_numbers
+                .retain(|epsilon_number| epsilon_number.chars().nth(position).unwrap() == '0');
         }
     }
 

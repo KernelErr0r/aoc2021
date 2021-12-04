@@ -1,13 +1,17 @@
-use std::{fs::File, io::{self, BufRead, BufReader}};
+use std::{
+    fs::File,
+    io::{self, BufRead, BufReader},
+};
 
-fn main() -> Result<(), io::Error>{
+fn main() -> Result<(), io::Error> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
     let mut horizontal = 0isize;
     let mut depth = 0isize;
 
-    reader.lines()
+    reader
+        .lines()
         .into_iter()
         .filter_map(|line| line.ok())
         .map(|line| {

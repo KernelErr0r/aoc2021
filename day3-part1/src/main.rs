@@ -1,10 +1,15 @@
-use std::{error::Error, fs::File, io::{BufRead, BufReader}};
+use std::{
+    error::Error,
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
 fn main() -> Result<(), Box<dyn Error>> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let binary_numbers = reader.lines()
+    let binary_numbers = reader
+        .lines()
         .into_iter()
         .filter_map(|line| line.ok())
         .collect::<Vec<_>>();
@@ -12,7 +17,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut gamma_rate = String::new();
     let mut epsilon_rate = String::new();
 
-    for position in 0 .. binary_numbers[0].len() {
+    for position in 0..binary_numbers[0].len() {
         let mut zeroes = 0usize;
         let mut ones = 0usize;
 
